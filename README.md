@@ -9,7 +9,7 @@ INSTALL:
 
 3) run "bower install"
 
-4) run "php bing/console doctrine:migrations:migrate"
+4) run "php bin/console doctrine:migrations:migrate"
 
 5) run "php bin/console fos:user:create" and create "admin"
 
