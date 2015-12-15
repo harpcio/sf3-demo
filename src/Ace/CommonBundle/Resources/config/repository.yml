@@ -1,0 +1,16 @@
+parameters:
+    common.entity.blog.class: Ace\CommonBundle\Entity\Blog
+    common.entity.event.class: Ace\CommonBundle\Entity\Event
+
+services:
+    common.repository.blog:
+        class: Ace\CommonBundle\Entity\Repository\BlogRepository
+        factory: ["@doctrine", getRepository]
+        arguments:
+            - "%common.entity.blog.class%"
+
+    common.repository.event:
+        class: Ace\CommonBundle\Entity\Repository\EventRepository
+        factory: ["@doctrine", getRepository]
+        arguments:
+            - "%common.entity.event.class%"

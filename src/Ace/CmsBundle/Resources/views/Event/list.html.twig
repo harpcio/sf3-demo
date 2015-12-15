@@ -1,0 +1,20 @@
+{% extends "@AceCommon/Default/layout.html.twig" %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Event</h1>
+        <a href="{{ path('cms.event.create') }}" class="btn btn-primary">Create event item</a>
+    </div>
+
+    <ul>
+        {% for event in events %}
+            <li>
+                {{ event.name }} ({{ event.id }})
+
+                <a href="{{ path('cms.event.update', {id: event.id}) }}" class="btn btn-info">Update</a>
+                <a href="#" data-toggle="modal" data-url="{{ path('cms.event.delete', {id: event.id}) }}" class="btn btn-danger csrf-item">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {{ include('AceCommonBundle:Default:csrf-item.html.twig', { 'csrfForm': csrfForm }) }}
+{% endblock content %}

@@ -1,0 +1,16 @@
+services:
+
+    app.controller.blog.list:
+        class: Ace\AppBundle\Controller\Blog\ListController
+        arguments:
+            - "@common.repository.blog"
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    app.controller.blog.show:
+        class: Ace\AppBundle\Controller\Blog\ShowController
+        arguments:
+            - "@session"
+            - "@common.repository.blog"
+        calls:
+            - [setContainer, ["@service_container"]]

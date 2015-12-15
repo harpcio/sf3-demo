@@ -1,0 +1,24 @@
+imports:
+    - { resource: repository.yml }
+
+services:
+
+    common.menu_builder:
+        class: Ace\CommonBundle\Menu\Builder
+        arguments: ["@knp_menu.factory", "@common.repository.blog", "@common.security.menu.access_filter", "@request_stack"]
+        tags:
+            - { name: knp_menu.menu_builder, method: mainMenu, alias: main }
+            - { name: knp_menu.menu_builder, method: navMenu, alias: nav }
+
+    common.security.route_acl:
+        class: Ace\CommonBundle\Security\RouteAcl
+        arguments:
+            - "@security.access_map"
+            - "@request_stack"
+
+    common.security.menu.access_filter:
+        class: Ace\CommonBundle\Security\Menu\AccessFilter
+        public: false
+        arguments:
+            - "@security.authorization_checker"
+            - "@common.security.route_acl"

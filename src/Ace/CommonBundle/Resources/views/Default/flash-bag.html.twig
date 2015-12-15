@@ -1,0 +1,42 @@
+{% if app.session.flashbag.has('notice') %}
+    <div class="alert alert-warning">
+        {% set flashMessages = app.session.flashbag.get('notice') %}
+        {% if flashMessages|length > 1 %}
+            <ul>
+                {% for flashMessage in flashMessages %}
+                    <li>{{ flashMessage }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            {{ flashMessages|first }}
+        {% endif %}
+    </div>
+{% endif %}
+{% if app.session.flashbag.has('error') %}
+    <div class="alert alert-danger">
+        {% set flashMessages = app.session.flashbag.get('error') %}
+        {% if flashMessages|length > 1 %}
+            <ul>
+                {% for flashMessage in flashMessages %}
+                    <li>{{ flashMessage }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            {{ flashMessages|first }}
+        {% endif %}
+    </div>
+{% endif %}
+{% if app.session.flashbag.has('success') %}
+    <div class="alert alert-success">
+        {% set flashMessages = app.session.flashbag.get('success') %}
+        {% if flashMessages|length > 1 %}
+            <ul>
+                {% for flashMessage in flashMessages %}
+                    <li>{{ flashMessage }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            {{ flashMessages|first }}
+        {% endif %}
+    </div>
+{% endif %}

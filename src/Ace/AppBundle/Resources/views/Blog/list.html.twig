@@ -1,0 +1,15 @@
+{% extends "@AceCommon/Default/layout.html.twig" %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Blog list</h1>
+    </div>
+
+    <ul>
+        {% for blog in blogs %}
+            <li>
+                <a href="{{ path('app.blog.show', {id: blog.id}) }}">{{ blog.name }} ({{ blog.id }})</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

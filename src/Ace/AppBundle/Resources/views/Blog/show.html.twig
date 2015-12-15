@@ -1,0 +1,26 @@
+{% extends '@AceCommon/Default/layout.html.twig' %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Blog show</h1>
+    </div>
+
+    <ul>
+        <li>{{ blog.id }}</li>
+        <li>{{ blog.name }}</li>
+        <li>{{ blog.intro }}</li>
+        <li>{{ blog.content }}</li>
+        <li>{{ blog.createdAt|date('Y-m-d H:i:s') }}</li>
+        <li>{{ blog.createdBy }}</li>
+        {% if blog.events|length > 0 %}
+            <li>Events:
+                <ul>
+                    {% for event in blog.events %}
+                        <li>{{ event.name }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}
+

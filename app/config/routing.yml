@@ -1,0 +1,16 @@
+ace_common:
+    resource: "@AceCommonBundle/Resources/config/routing.yml"
+    prefix:   /
+
+ace_app:
+    resource: "@AceAppBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+ace_cms:
+    resource: "@AceCmsBundle/Controller/"
+    type:     annotation
+    prefix:   /cms
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

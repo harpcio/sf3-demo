@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company inc.</title>
+    {% stylesheets filter='cssrewrite'
+    'assets/vendor/bootstrap/dist/css/bootstrap.min.css'
+    'assets/theme/default/css/main.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+</head>
+<body>
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('app.homepage') }}">Ace</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            {{ knp_menu_render('nav', {'currentClass': 'active', 'ancestorClass': 'open', template: 'AceCommonBundle:Menu:navbar.html.twig'}) }}
+            <ul class="nav navbar-nav navbar-right">
+                {% if not app.user %}
+                    <li>
+                        <a href="{{ path('fos_user_security_login') }}">Login</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <p class="navbar-text">
+                            Signed in as <a href="#" class="navbar-link">{{ app.user.username }}</a>
+                        </p>
+                    </li>
+                    <li class="nav-divider"></li>
+                    <li>
+                        <a href="{{ path('fos_user_security_logout') }}">
+                            Logout
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+
+        </div>
+        <!-- /.nav-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<!-- /.navbar -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">Menu</p>
+
+            <div class="list-group">
+                {{ knp_menu_render('main') }}
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            {{ include('AceCommonBundle:Default:flash-bag.html.twig') }}
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <hr>
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright © Ace 2015</p>
+            </div>
+        </div>
+    </footer>
+</div>
+<!--/.container-->
+
+{% javascripts
+'assets/vendor/jquery/dist/jquery.min.js'
+'assets/vendor/bootstrap/dist/js/bootstrap.min.js'
+'@AceCommonBundle/Resources/public/js/common.js' %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+</body>
+</html>

@@ -1,0 +1,19 @@
+<div class="modal fade" id="csrfModal" tabindex="-1" role="dialog" aria-labelledby="csrfModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="csrfModalLabel">{{ "Confirm action"|trans }}</h4>
+            </div>
+            <div class="modal-body">
+                {{ 'Are you sure you want to proceed?'|trans }}
+            </div>
+            <div class="modal-footer">
+                {{ form_start(csrfForm) }}
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ "Close"|trans }}</button>
+                {{ form_widget(csrfForm.submit, { 'attr': {'class': 'btn btn-primary'} }) }}
+                {{ form_end(csrfForm) }}
+            </div>
+        </div>
+    </div>
+</div>

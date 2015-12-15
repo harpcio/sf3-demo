@@ -1,0 +1,22 @@
+{
+  "name": "sf2-demo",
+  "homepage": "https://github.com/harpcio/sf2-demo",
+  "authors": [
+    "Rafal Ksiazek <harpcio@gmail.com>"
+  ],
+  "description": "Symfony2 Advanced Demo with Doctrine, FOSUserBundle, KnpMenuBundle",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "directory": "web/assets/vendor/",
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}
