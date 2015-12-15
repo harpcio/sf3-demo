@@ -1,4 +1,4 @@
-Symfony2 Demo with DoctrineMigrations, KnpMenu, FOSUserBundle
+Symfony3 Demo with DoctrineMigrations, KnpMenu, FOSUserBundle
 =======================
 
 INSTALL:
