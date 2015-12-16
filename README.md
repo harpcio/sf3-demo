@@ -15,4 +15,4 @@ INSTALL:
 
 6) run "php bin/console fos:user:promote" and add to "admin" role "ROLE_ADMIN"
 
-Nice fun!
+Have fun!
