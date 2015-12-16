@@ -5,7 +5,7 @@ namespace Ace\CmsBundle\Service\Event;
 use Ace\CommonBundle\Entity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class Save
+class CreateUpdate
 {
     private $uploadPath;
 

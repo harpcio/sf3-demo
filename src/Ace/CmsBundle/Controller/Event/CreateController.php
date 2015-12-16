@@ -20,18 +20,18 @@ class CreateController extends Controller
     private $formFactory;
     private $session;
     private $eventRepository;
-    private $saveService;
+    private $createUpdateService;
 
     public function __construct(
         FormFactoryInterface $formFactory,
         Session $session,
         EventRepository $eventRepository,
-        Service\Event\Save $saveService
+        Service\Event\CreateUpdate $createUpdateService
     ) {
         $this->formFactory = $formFactory;
         $this->session = $session;
         $this->eventRepository = $eventRepository;
-        $this->saveService = $saveService;
+        $this->createUpdateService = $createUpdateService;
     }
 
     /**
@@ -52,14 +52,13 @@ class CreateController extends Controller
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $event->setCreatedBy($user);
-                $this->saveService->handle($event);
+                $this->createUpdateService->handle($event);
                 $this->eventRepository->save([$event], true);
 
                 $this->session->getFlashBag()->add('success', 'Item was successfully saved');
 
                 return $this->redirectToRoute("cms.event.update", ['id' => $event->getId()]);
             } else {
-                dump($form->getErrors(true, true)); exit;
                 $this->session->getFlashBag()->add('error', 'The form has some error(s).');
             }
         }
