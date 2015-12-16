@@ -1,0 +1,7 @@
+services:
+    ace.common.event_type:
+        class: Ace\CommonBundle\Form\EventType
+        arguments:
+            - "%brochure_dir%"
+        tags:
+            - { name: form.type }

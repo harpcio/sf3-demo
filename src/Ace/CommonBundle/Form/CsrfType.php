@@ -3,7 +3,7 @@
 namespace Ace\CommonBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,7 +18,7 @@ class CsrfType extends AbstractType
         $builder
             ->add(
                 'submit',
-                SubmitType::class,
+                Type\SubmitType::class,
                 [
                     'label' => 'Submit',
                     'attr' => [
@@ -34,7 +34,7 @@ class CsrfType extends AbstractType
      */
     public function getName()
     {
-        return 'csrf_form';
+        return 'ace_common_csrf';
     }
 
     /**

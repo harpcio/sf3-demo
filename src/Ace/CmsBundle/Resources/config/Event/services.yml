@@ -1,0 +1,7 @@
+services:
+    ace.cms.service.event.save:
+        class: Ace\CmsBundle\Service\Event\Save
+        arguments:
+            - "%brochure_dir%"
+
+
