@@ -3,9 +3,7 @@
 namespace Ace\CmsBundle\Controller\Blog;
 
 use Ace\CommonBundle\Entity\Blog;
-use Ace\CommonBundle\Entity\Event;
 use Ace\CommonBundle\Entity\Repository\BlogRepository;
-use Ace\CommonBundle\Entity\Repository\EventRepository;
 use Ace\CommonBundle\Form\BlogType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

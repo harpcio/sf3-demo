@@ -13,6 +13,7 @@ services:
             - "@form.factory"
             - "@session"
             - "@common.repository.event"
+            - "@ace.cms.service.event.create_update"
         calls:
             - [setContainer, ["@service_container"]]
 
@@ -22,6 +23,7 @@ services:
             - "@form.factory"
             - "@session"
             - "@common.repository.event"
+            - "@ace.cms.service.event.create_update"
         calls:
             - [setContainer, ["@service_container"]]
 

@@ -15,5 +15,8 @@ parameters:
     mailer_user:       ~
     mailer_password:   ~
 
+    brochure_uri_prefix: "upload/brochures/"
+    brochure_dir: "%kernel.root_dir%/../web/upload/brochures"
+
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt

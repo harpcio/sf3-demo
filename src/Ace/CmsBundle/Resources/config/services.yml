@@ -1,6 +1,7 @@
 imports:
     - { resource: Blog/controller.yml }
     - { resource: Event/controller.yml }
+    - { resource: Event/services.yml }
 
 services:
 

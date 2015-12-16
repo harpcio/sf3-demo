@@ -2,12 +2,15 @@
 
 namespace Ace\CmsBundle\Controller\Event;
 
+use Ace\CmsBundle\Service;
+use Ace\CommonBundle\Entity;
 use Ace\CommonBundle\Entity\Repository\EventRepository;
 use Ace\CommonBundle\Form\EventType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -19,15 +22,18 @@ class UpdateController extends Controller
     private $formFactory;
     private $session;
     private $eventRepository;
+    private $createUpdateService;
 
     public function __construct(
         FormFactoryInterface $formFactory,
         Session $session,
-        EventRepository $eventRepository
+        EventRepository $eventRepository,
+        Service\Event\CreateUpdate $createUpdateService
     ) {
         $this->formFactory = $formFactory;
         $this->session = $session;
         $this->eventRepository = $eventRepository;
+        $this->createUpdateService = $createUpdateService;
     }
 
     /**
@@ -41,6 +47,7 @@ class UpdateController extends Controller
      */
     public function indexAction(Request $request, $id)
     {
+        /** @var Entity\Event $event */
         $event = $this->eventRepository->find($id);
 
         if (!$event) {
@@ -54,6 +61,7 @@ class UpdateController extends Controller
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
+                $this->createUpdateService->handle($event);
                 $this->eventRepository->save([$event], true);
 
                 $this->session->getFlashBag()->add('success', 'Item was successfully saved.');

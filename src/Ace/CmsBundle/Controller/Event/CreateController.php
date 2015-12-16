@@ -2,6 +2,7 @@
 
 namespace Ace\CmsBundle\Controller\Event;
 
+use Ace\CmsBundle\Service;
 use Ace\CommonBundle\Entity\Repository\EventRepository;
 use Ace\CommonBundle\Form\EventType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -19,15 +20,18 @@ class CreateController extends Controller
     private $formFactory;
     private $session;
     private $eventRepository;
+    private $createUpdateService;
 
     public function __construct(
         FormFactoryInterface $formFactory,
         Session $session,
-        EventRepository $eventRepository
+        EventRepository $eventRepository,
+        Service\Event\CreateUpdate $createUpdateService
     ) {
         $this->formFactory = $formFactory;
         $this->session = $session;
         $this->eventRepository = $eventRepository;
+        $this->createUpdateService = $createUpdateService;
     }
 
     /**
@@ -47,9 +51,8 @@ class CreateController extends Controller
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-
                 $event->setCreatedBy($user);
-
+                $this->createUpdateService->handle($event);
                 $this->eventRepository->save([$event], true);
 
                 $this->session->getFlashBag()->add('success', 'Item was successfully saved');

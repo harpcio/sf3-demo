@@ -4,6 +4,7 @@ namespace Ace\CommonBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Event
@@ -82,18 +83,24 @@ class Event
     private $blogs;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     *
+     * @Assert\File(mimeTypes={ "application/pdf" })
+     */
+    private $brochure;
+
+    /**
      * @var \DateTime
      *
-     * @ORM\Column(name="create_at", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime")
      */
-    private $createAt;
+    private $createdAt;
 
     /**
      * @var User
      *
      * @ORM\ManyToOne(
-     *     targetEntity="User",
-     *     inversedBy="createdBy"
+     *     targetEntity="User"
      * )
      * @ORM\JoinColumn(
      *     name="created_by",
@@ -105,7 +112,7 @@ class Event
 
     public function __construct()
     {
-        $this->createAt = new \DateTime();
+        $this->createdAt = new \DateTime();
         $this->blogs = new ArrayCollection();
     }
 
@@ -284,32 +291,46 @@ class Event
     }
 
     /**
-     * Set createAt
-     *
-     * @param \DateTime $createAt
+     * @return string
+     */
+    public function getBrochure()
+    {
+        return $this->brochure;
+    }
+
+    /**
+     * @param string $brochure
      *
      * @return Event
      */
-    public function setCreateAt($createAt)
+    public function setBrochure($brochure)
     {
-        $this->createAt = $createAt;
+        $this->brochure = $brochure;
 
         return $this;
     }
 
     /**
-     * Get createAt
+     * @param \DateTime $createdAt
      *
-     * @return \DateTime
+     * @return Event
      */
-    public function getCreateAt()
+    public function setCreatedAt($createdAt)
     {
-        return $this->createAt;
+        $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
-     * Set createdBy
-     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
      * @param \stdClass $createdBy
      *
      * @return Event
@@ -322,8 +343,6 @@ class Event
     }
 
     /**
-     * Get createdBy
-     *
      * @return \stdClass
      */
     public function getCreatedBy()
@@ -333,7 +352,7 @@ class Event
 
     public function __toString()
     {
-        return '(' . $this->getId() . ') ' . $this->getName();
+        return '('.$this->getId().') '.$this->getName();
     }
 }
 

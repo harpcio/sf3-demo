@@ -16,7 +16,15 @@
             <li>Events:
                 <ul>
                     {% for event in blog.events %}
-                        <li>{{ event.name }}</li>
+                        <li>Name: {{ event.name }}</li>
+                        <li>Intro: {{ event.intro }}</li>
+                        <li>Start: {{ event.start | date('Y-m-d') }}</li>
+                        <li>End: {{ event.end | date('Y-m-d') }}</li>
+                        <li>Created by: {{ event.createdBy.username }}</li>
+                        <li>Created at: {{ event.createdAt | date('Y-m-d H:i:s') }}</li>
+                        {% if event.brochure %}
+                        <li><a href="{{ asset('%brochure_uri_prefix%' ~ event.brochure) }}">View brochure (PDF)</a></li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </li>
