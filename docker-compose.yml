@@ -1,0 +1,84 @@
+version: '2'
+services:
+  db:
+    build: docker/mysql
+    image: sf3-docker-demo-db
+    container_name: sf3-docker-demo-db
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - front
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "symfony"
+      MYSQL_USER: "sf3"
+      MYSQL_PASSWORD: "sf3"
+
+  data:
+    image: busybox
+    container_name: sf3-docker-demo-data
+    networks:
+      - front
+    volumes:
+      - ./:/app
+
+  php:
+    build: docker/php-fpm
+    image: sf3-docker-demo-php
+    container_name: sf3-docker-demo-php
+    networks:
+      - front
+    volumes_from:
+      - data
+    working_dir: /app
+    links:
+      - db
+
+  nginx:
+    build: docker/nginx
+    image: sf3-docker-demo-nginx
+    container_name: sf3-docker-demo-nginx
+    ports:
+      - "80:80"
+    links:
+      - php
+    networks:
+      - front
+    volumes_from:
+      - data
+    volumes:
+      - ./var/logs/nginx:/var/log/nginx
+
+  symfony:
+    build: docker/symfony
+    image: sf3-docker-demo-symfony
+    container_name: sf3-docker-demo-symfony
+    networks:
+      - front
+    depends_on: 
+      - php
+    links:
+      - db
+    volumes_from:
+      - data
+    
+  nodejs:
+    build: docker/nodejs
+    image: sf3-docker-demo-nodejs
+    container_name: sf3-docker-demo-nodejs
+    networks:
+      - front
+    volumes_from:
+      - data
+    tty: true
+    stdin_open: true
+
+volumes:
+  mysql-data:
+    driver: local
+
+networks:
+  front:
+    driver: bridge

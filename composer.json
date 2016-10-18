@@ -29,7 +29,7 @@
         "symfony/assetic-bundle": "^2.7",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "knplabs/knp-menu-bundle": "^2.1",
-        "doctrine/migrations": "v1.1.x-dev",
+        "doctrine/migrations": "^1.0",
         "doctrine/doctrine-migrations-bundle": "^1.1"
     },
     "require-dev": {
