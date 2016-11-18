@@ -1,13 +1,13 @@
 all:
 
 composer: 
-	@docker-compose run --rm symfony composer $(filter-out $@, $(MAKECMDGOALS));
+	@docker-compose exec symfony composer $(filter-out $@, $(MAKECMDGOALS));
 
 bower: 
-	@docker-compose run --rm nodejs bower $(filter-out $@, $(MAKECMDGOALS));
+	@docker-compose exec nodejs bower $(filter-out $@, $(MAKECMDGOALS));
 
 console:
-	@docker-compose run --rm symfony bin/console $(filter-out $@, $(MAKECMDGOALS));
+	@docker-compose exec symfony bin/console $(filter-out $@, $(MAKECMDGOALS));
 
 %:
 	@:
