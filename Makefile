@@ -1,7 +1,4 @@
-build:
-	@$(MAKE) composer install;
-	@$(MAKE) bower install;
-	@$(MAKE) console doctrine:migrations:migrate;
+all:
 
 composer: 
 	@docker-compose run --rm symfony composer $(filter-out $@, $(MAKECMDGOALS));
