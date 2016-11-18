@@ -1,7 +1,4 @@
-FROM node
-
-# Install Bower & Grunt
-RUN npm install -g bower grunt-cli
+FROM digitallyseamless/nodejs-bower-grunt:5
 
 RUN useradd -ms /bin/bash vagrant
 

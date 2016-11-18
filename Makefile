@@ -1,5 +1,16 @@
+build:
+	@$(MAKE) composer install;
+	@$(MAKE) bower install;
+	@$(MAKE) console doctrine:migrations:migrate;
 
-composer: cmd = install --no-scripts
-composer:
-	@docker-compose run --rm composer $(cmd) 
+composer: 
+	@docker-compose run --rm symfony composer $(filter-out $@, $(MAKECMDGOALS));
 
+bower: 
+	@docker-compose run --rm nodejs bower $(filter-out $@, $(MAKECMDGOALS));
+
+console:
+	@docker-compose run --rm symfony bin/console $(filter-out $@, $(MAKECMDGOALS));
+
+%:
+	@:
